@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotasTable extends Migration
+class CreateAvaliacaosTable extends Migration
 {
     public function up()
     {
@@ -24,7 +24,7 @@ class CreateNotasTable extends Migration
             $table->foreign('peca_id')->references('id')->on('pecas')->onDelete('cascade');
 
             //um usuario nao pode votar na mesma obra duas vezes.
-            $table->primary(['autor_id', 'peca_id']);
+            $table->unique(['autor_id', 'peca_id']);
             $table->timestamps();
         });
     }

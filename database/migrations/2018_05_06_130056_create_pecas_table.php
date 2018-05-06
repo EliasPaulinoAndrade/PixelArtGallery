@@ -28,6 +28,7 @@ class CreatePecasTable extends Migration
 
     public function down()
     {
+        Schema::dropIfExists('avaliacaos');
         Schema::dropIfExists('pecas');
     }
 }

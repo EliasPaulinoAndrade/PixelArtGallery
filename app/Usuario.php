@@ -26,4 +26,9 @@ class Usuario extends Model
         return $this->belongsToMany(Usuario::class, "seguidor_seguido", "seguidor_id", "seguido_id");
     }
 
+    /*cada usuario pode fazer varias avaliacoes a pecas diferentes*/
+    public function avaliacoes()
+    {
+        return $this->hasMany(Avaliacao::class, 'autor_id');
+    }
 }
