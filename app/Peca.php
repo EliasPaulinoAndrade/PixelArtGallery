@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Peca extends Model
+class Peca extends QFModel
 {
     protected $fillable = ['nome', 'descricao', 'data', 'imagem', 'autor_id'];
 

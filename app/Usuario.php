@@ -3,9 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class Usuario extends Authenticatable
+class Usuario extends QFModel implements AuthenticatableContract, CanResetPasswordContract
 {
     protected $fillable = ['email', 'senha', 'img_perfil', 'descricao', 'nome'];
     protected $hidden = ['senha'];
@@ -38,6 +39,11 @@ class Usuario extends Authenticatable
         return 'email'; 
     }
 
+    public function getAuthIdentifier()
+    {
+        return $this->email;
+    }
+
     public function getAuthPassword()
     {
         return $this->senha;
@@ -47,8 +53,23 @@ class Usuario extends Authenticatable
         return null;
     }
 
+    public function setRememberToken($value)
+    {
+
+    }
+
     public function getRememberTokenName()
     {
-        return null; // not supported
+        return null;
+    }
+
+    public function getEmailForPasswordReset()
+    {
+
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+
     }
 }

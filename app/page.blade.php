@@ -59,40 +59,21 @@
                     <ul class="nav navbar-nav">
                         <li>
                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
-                                @if(Auth::user() != null)
                                 <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
-                                    <i class="fa fa-fw fa-sign-out"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                    <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
                                 </a>
-                                @else
-                                <a href="{{ url(config('adminlte.login_url', 'auth/login')) }}">
-                                    <i class="fa fa-fw fa-sign-in"></i> {{ Login }}
-                                </a>
-                                @endif
                             @else
                                 <a href="#"
-                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    @if(Auth::user() != null)
-                                        <i class="fa fa-fw fa-sign-out"></i>
-                                        {{ trans('adminlte::adminlte.log_out') }}
-                                    @else
-                                        <i class="fa fa-fw fa-sign-in"></i>
-                                        Login
-                                    @endif
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                >
+                                    <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
                                 </a>
-                                @if(Auth::user() != null)
                                 <form id="logout-form" action="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" method="POST" style="display: none;">
                                     @if(config('adminlte.logout_method'))
                                         {{ method_field(config('adminlte.logout_method')) }}
                                     @endif
                                     {{ csrf_field() }}
                                 </form>
-                                @else
-                                <form id="logout-form" action="{{ url(config('adminlte.login_url', 'auth/login')) }}" method="GET" style="display: none;">
-                                    @if(config('adminlte.logout_method'))
-                                        {{ method_field(config('adminlte.logout_method')) }}
-                                    @endif
-                                </form>
-                                @endif
                             @endif
                         </li>
                     </ul>

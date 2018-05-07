@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Avaliacao extends Model
+class Avaliacao extends QFModel
 {
     protected $fillable = ['nota', 'autor_id', 'peca_id'];
 

@@ -131,7 +131,7 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'lock',
         ],
-        /*[
+        [
             'text'    => 'Multilevel',
             'icon'    => 'share',
             'submenu' => [
@@ -181,7 +181,7 @@ return [
         [
             'text'       => 'Information',
             'icon_color' => 'aqua',
-        ],*/
+        ],
     ],
 
     /*
