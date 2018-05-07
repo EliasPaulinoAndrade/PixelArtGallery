@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'Galeria de Arte',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => 'Galeria de <b>Arte</b>',
 
-    'logo_mini' => '<b>A</b>LT',
+    'logo_mini' => '<b>G</b>Art',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'blue',
+    'skin' => 'blue-light',
 
     /*
     |--------------------------------------------------------------------------
@@ -58,7 +58,7 @@ return [
     |
     */
 
-    'layout' => null,
+    'layout' => 'top-nav',
 
     /*
     |--------------------------------------------------------------------------
@@ -118,7 +118,6 @@ return [
             'text'        => 'Pages',
             'url'         => 'admin/pages',
             'icon'        => 'file',
-            'label'       => 4,
             'label_color' => 'success',
         ],
         'ACCOUNT SETTINGS',
@@ -132,7 +131,7 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'lock',
         ],
-        [
+        /*[
             'text'    => 'Multilevel',
             'icon'    => 'share',
             'submenu' => [
@@ -182,7 +181,7 @@ return [
         [
             'text'       => 'Information',
             'icon_color' => 'aqua',
-        ],
+        ],*/
     ],
 
     /*

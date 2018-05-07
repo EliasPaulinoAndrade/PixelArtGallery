@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
     protected $fillable = ['email', 'senha', 'img_perfil', 'descricao', 'nome'];
     protected $hidden = ['senha'];
@@ -30,5 +31,24 @@ class Usuario extends Model
     public function avaliacoes()
     {
         return $this->hasMany(Avaliacao::class, 'autor_id');
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'email'; 
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->senha;
+    }
+
+    public function getRememberToken(){
+        return null;
+    }
+
+    public function getRememberTokenName()
+    {
+        return null; // not supported
     }
 }

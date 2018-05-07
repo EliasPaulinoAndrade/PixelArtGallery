@@ -8,6 +8,7 @@ class CreateUsuariosTable extends Migration
 {
     public function up()
     {
+        Schema::defaultStringLength(191);
         Schema::create('usuarios', function (Blueprint $table) {
             $table->increments('id');
 
@@ -17,8 +18,8 @@ class CreateUsuariosTable extends Migration
             $table->string("senha");
 
             //link da imagem de perfil
-            $table->string("img_perfil");
-            $table->string("descricao");
+            $table->string("img_perfil")->default("img_padrao.png");
+            $table->string("descricao")->default("");
 
             $table->timestamps();   
         });
