@@ -13,7 +13,7 @@ class CreateComentariosTable extends Migration
 
             /*campos*/
             //texto e data de postagem do comentario
-            $table->string('descricao');
+            $table->string('descricao', 300);
             $table->dateTime('data');
 
             /*chanves estrangeiras*/
@@ -21,7 +21,10 @@ class CreateComentariosTable extends Migration
             $table->integer('peca_id')->unsigned()->index();
             $table->foreign('peca_id')->references('id')->on('pecas')->onDelete('cascade');
 
-            $table->timestamps();
+            //o autor do comentario
+            $table->integer('autor_id')->unsigned()->index();
+            $table->foreign('autor_id')->references('id')->on('usuarios')->onDelete('cascade');
+
         });
     }
 

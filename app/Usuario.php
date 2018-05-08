@@ -12,6 +12,7 @@ class Usuario extends QFModel implements AuthenticatableContract, CanResetPasswo
 {
     protected $fillable = ['email', 'senha', 'img_perfil', 'descricao', 'nome'];
     protected $hidden = ['senha'];
+    public $timestamps = false;
 
     /*um usuario pode postar varias pecas*/
     public function pecas()
@@ -34,6 +35,11 @@ class Usuario extends QFModel implements AuthenticatableContract, CanResetPasswo
     public function avaliacoes()
     {
         return $this->myHasMany(Avaliacao::class, 'autor_id');
+    }
+
+    /*comentarios do usuario*/
+    public function comentarios(){
+        return $this->myHasMany(Comentario::class, 'autor_id');
     }
 
     public function getAuthIdentifierName()

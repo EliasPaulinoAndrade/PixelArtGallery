@@ -25,7 +25,6 @@ class CreateAvaliacaosTable extends Migration
 
             //um usuario nao pode votar na mesma obra duas vezes.
             $table->unique(['autor_id', 'peca_id']);
-            $table->timestamps();
         });
     }
 

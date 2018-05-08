@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Usuario;
 
-class DatabaseSeeder extends Seeder
+class UsuarioSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,8 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsuarioSeed::class);
-        $this->call(PecaSeed::class);
-        $this->call(ComentarioSeed::class);
+        factory(Usuario::class, 3)->create();
     }
 }

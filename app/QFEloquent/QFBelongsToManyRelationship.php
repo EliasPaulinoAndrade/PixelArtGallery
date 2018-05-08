@@ -40,12 +40,12 @@ class QFBelongsToManyRelationship implements QFRelationship{
     }
 
     public function add($id){
-
+        $addQuery = "INSERT INTO $this->tableName ($this->otherSideIdName, $this->thisSideIdName)
+                     VALUES ($id, $this->id)";
+    
+        return DB::insert($addQuery);
     }
 
-    public function remove($id){
-        
-    }
 }
 
 ?>

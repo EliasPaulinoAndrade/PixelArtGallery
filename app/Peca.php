@@ -8,6 +8,7 @@ use App\QFEloquent\QFModel;
 class Peca extends QFModel
 {
     protected $fillable = ['nome', 'descricao', 'data', 'imagem', 'autor_id'];
+    public $timestamps = false;
 
     /*uma peca tem varios comentarios e um autor*/
     public function comentarios()

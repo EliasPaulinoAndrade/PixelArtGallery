@@ -21,7 +21,6 @@ class CreateUsuariosTable extends Migration
             $table->string("img_perfil")->default("img_padrao.png");
             $table->string("descricao")->default("");
 
-            $table->timestamps();   
         });
 
         Schema::create('seguidor_seguido', function(Blueprint $table){

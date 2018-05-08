@@ -13,7 +13,7 @@ class CreatePecasTable extends Migration
             
             /*campos*/
             $table->string("nome");
-            $table->string("descricao")->default("");
+            $table->string("descricao", 300)->default("");
             $table->dateTime("data");
             $table->string("imagem")->default("img_teste.png");
 
@@ -22,7 +22,6 @@ class CreatePecasTable extends Migration
             $table->integer('autor_id')->unsigned()->index();
             $table->foreign('autor_id')->references('id')->on('usuarios')->onDelete('cascade');
 
-            $table->timestamps();
         });
     }
 

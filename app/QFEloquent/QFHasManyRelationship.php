@@ -32,15 +32,6 @@ class QFHasManyRelationship implements QFRelationship{
         return $modelResult;
     }
 
-    public function add($id){
-
-
-    }
-
-    public function remove($id){
-
-
-    }
 }
 
 ?>

@@ -92,7 +92,7 @@ class QFModel extends Model
         }
 
         $updateQuery = $updateBeginQuery . $updateEndQuery ;
-        return DB::insert($updateQuery);
+        return DB::update($updateQuery);
     }
 
     public static function rowQueryToModel($row, $className){

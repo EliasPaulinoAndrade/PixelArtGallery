@@ -31,15 +31,6 @@ class QFBelongsToRelationship implements QFRelationship{
 
         return $oneSideModel;
     }
-
-    public function add($id){
-
-    }
-
-    public function remove($id){
-
-        
-    }
 }
 
 ?>
