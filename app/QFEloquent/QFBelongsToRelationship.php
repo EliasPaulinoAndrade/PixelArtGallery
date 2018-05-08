@@ -3,7 +3,8 @@
 namespace App\QFEloquent;
 use DB;
 
-class QFBelongsToRelationship{
+/*representa um relacionamento de "pertencer" a alguem*/
+class QFBelongsToRelationship implements QFRelationship{
 
     private $id, $oneSide, $manySide, $oneSideIdName;
 
@@ -21,7 +22,6 @@ class QFBelongsToRelationship{
         $oneSideTableName = QFDBHelper::tableNameFromClass($this->oneSide);
         $manySideTableName = QFDBHelper::tableNameFromClass($this->manySide);
 
-
         $selectQuery = "SELECT * FROM $manySideTableName WHERE $manySideTableName.id = $this->id";
         
         print($selectQuery);
@@ -30,6 +30,15 @@ class QFBelongsToRelationship{
         $oneSideModel = $this->oneSide::myFind($oneSideID);
 
         return $oneSideModel;
+    }
+
+    public function add($id){
+
+    }
+
+    public function remove($id){
+
+        
     }
 }
 

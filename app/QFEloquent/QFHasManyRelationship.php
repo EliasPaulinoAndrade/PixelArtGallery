@@ -3,7 +3,8 @@
 namespace App\QFEloquent;
 use DB;
 
-class QFHasManyRelationship{
+/*representa o relacionamento de "ser dono de varios"*/
+class QFHasManyRelationship implements QFRelationship{
     private $id, $oneSide, $manySide, $oneSideIdName;
 
     public function __construct($id, $oneSide, $manySide, $oneSideName = null){
@@ -29,6 +30,16 @@ class QFHasManyRelationship{
         }
 
         return $modelResult;
+    }
+
+    public function add($id){
+
+
+    }
+
+    public function remove($id){
+
+
     }
 }
 
