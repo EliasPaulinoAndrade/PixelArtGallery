@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\QFEloquent\QFModel;
 
 class Peca extends QFModel
 {
@@ -11,17 +12,17 @@ class Peca extends QFModel
     /*uma peca tem varios comentarios e um autor*/
     public function comentarios()
     {
-        return $this->hasMany(Comentario::class);
+        return $this->myHasMany(Comentario::class);
     }
 
     public function autor()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->myBelongsTo(Usuario::class, "autor_id");
     }
 
     /*cada peca pode ser avaliada por diversos ususarios*/
     public function avaliacoes()
     {
-        return $this->hasMany(Avaliacao::class);
+        return $this->myHasMany(Avaliacao::class);
     }
 }

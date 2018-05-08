@@ -13,9 +13,9 @@ class CreatePecasTable extends Migration
             
             /*campos*/
             $table->string("nome");
-            $table->string("descricao");
+            $table->string("descricao")->default("");
             $table->dateTime("data");
-            $table->string("imagem");
+            $table->string("imagem")->default("img_teste.png");
 
             /*chanves estrangeiras*/
             //o autor da peca
