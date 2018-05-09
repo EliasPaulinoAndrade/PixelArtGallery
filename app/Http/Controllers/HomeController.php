@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\QFEloquent\QFModel;
+use App\Peca;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $pecasByDate = Peca::getSortedByDate($limit = 10);
+        $pecasByEvaluation = Peca::getBestEvalueted($limit = 10);
+
+        
+        return view('home', compact("pecasByDate", "pecasByEvaluation"));
     }
+    
 }

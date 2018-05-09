@@ -62,7 +62,13 @@ class QFModel extends Model
         }
 
         $saveQuery = $saveBeginQuery . $saveEndQuery . ")";
-        return DB::insert($saveQuery);
+        $insertResult = DB::insert($saveQuery);
+
+        $lastId = DB::select("SELECT id FROM $tableName ORDER BY id DESC limit 1");
+
+        $this->id = $lastId[0]->id;
+
+        return $insertResult;
     }
 
     public function myUpdate(){
@@ -92,6 +98,7 @@ class QFModel extends Model
         }
 
         $updateQuery = $updateBeginQuery . $updateEndQuery ;
+
         return DB::update($updateQuery);
     }
 

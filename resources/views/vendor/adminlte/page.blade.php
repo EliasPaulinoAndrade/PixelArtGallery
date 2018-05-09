@@ -34,6 +34,15 @@
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">
                             @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
+
+                            @if(Auth::user() != null)
+                                <li class="">
+                                    <a href="/peca/create">
+                                        <i class="fa fa-paper-plane"></i>
+                                        Submeter Peça
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
