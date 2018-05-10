@@ -15,17 +15,14 @@
             </span>
         </div>
         <div class="box-body">
-            {{ Form::open(['files' => true, 'method' => 'post', 'route' => ['peca.store']]) }}
+            {{ Form::open(['method' => 'PUT', 'route' => ['peca.update', $peca->id]]) }}
                 <div class="box-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nome: </label>
-                        <input type="text" name="nome" class="form-control" id="tituloNovo" placeholder="Digite O Nome ...">
+                        <input type="text" name="nome" class="form-control" id="tituloNovo" placeholder="Digite O Nome ..." value = "{{$peca->nome}}">
                         <br>
                         <label for="exampleInputEmail1">Descricao: </label>
-                        <textarea type="text" name="descricao" class="form-control" id="tituloNovo" placeholder="Digite O Nome ..."></textarea>
-                        <br>
-                        <label for="exampleInputEmail1">Imagem: </label>
-                        <input type="file" name="imagem">
+                        <textarea type="text" name="descricao" class="form-control" id="tituloNovo" placeholder="Digite O Nome ...">{{$peca->nome}}</textarea>
                         
                     </div>
                 </div>

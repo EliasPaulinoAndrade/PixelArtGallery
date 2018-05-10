@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Peca;
+use App\Comentario;
 use Carbon\Carbon;
 use Auth;
 
-class PecaController extends Controller
+class ComentarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,9 +24,9 @@ class PecaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
-       
-        return view('submit'); 
+    public function create()
+    {
+        
     }
 
     /**
@@ -35,22 +35,17 @@ class PecaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-        $peca = new Peca($request->all());
-        $peca->data = Carbon::now();
-        $peca->autor_id = Auth::user()->id;
-        $peca->mySave();
+    public function store(Request $request)
+    {
+        $comentario = new Comentario($request->all());
+        $comentario->data = Carbon::now();
+        $comentario->autor_id = Auth::user()->id;
+        $comentario->mySave();
 
-        $imageFile = $request->file('imagem');
-        $imageExtension = $imageFile->extension();
-        $imageName = $peca->id . "." . $imageExtension;
-        $imageFile->storeAs('public/pecas_images/', $imageName);
+        return redirect("/peca/$comentario->peca_id");
 
-        $peca->imagem = $imageName;
 
-        $peca->myUpdate();
 
-        return redirect("/peca/$peca->id");
     }
 
     /**
@@ -61,9 +56,7 @@ class PecaController extends Controller
      */
     public function show($id)
     {
-        
-        $peca = Peca::myFind($id);
-        return view('peca', compact("peca")); 
+        //
     }
 
     /**
@@ -74,9 +67,7 @@ class PecaController extends Controller
      */
     public function edit($id)
     {
-        $peca = Peca::myFind($id);
-
-        return view('edit', compact("peca")); 
+        //
     }
 
     /**
@@ -88,17 +79,7 @@ class PecaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $peca = Peca::myFind($id);
-        if($peca->autor_id != Auth::user()->id){
-            return redirect("/home");
-        }
-
-        $peca->nome = $request->nome;
-        $peca->descricao = $request->descricao;
-
-        $peca->myUpdate();
-
-        return redirect("/peca/".$peca->id);
+        //
     }
 
     /**

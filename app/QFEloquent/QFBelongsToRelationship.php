@@ -24,7 +24,6 @@ class QFBelongsToRelationship implements QFRelationship{
 
         $selectQuery = "SELECT * FROM $manySideTableName WHERE $manySideTableName.id = $this->id";
         
-        print($selectQuery);
         $result = DB::select($selectQuery);
         $oneSideID = $result[0]->{$this->oneSideIdName};
         $oneSideModel = $this->oneSide::myFind($oneSideID);

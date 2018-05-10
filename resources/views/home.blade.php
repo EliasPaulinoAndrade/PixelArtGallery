@@ -3,7 +3,11 @@
 @section('title', 'Galeria de Arte')
 
 @section('content_header')
-    <h1>Inicio</h1>
+    <section class="content-header">
+        <h1>
+            Inicio
+        </h1> 
+    </section>
 @stop
 
 @section('content')
@@ -21,6 +25,9 @@
                 </a>
             @endforeach
         </div>
+        <div class="box-footer">
+            <button type="button" class="btn pull-right btn-primary">Ver Mais</button>
+        </div>
     </div>
 </div>
 
@@ -35,6 +42,9 @@
             @foreach($pecasByEvaluation as $peca)
                 <img src="/storage/pecas_images/{{$peca->imagem}}" alt="..." class="margin" width = 100>
             @endforeach
+        </div>
+        <div class="box-footer">
+            <button type="button" class="btn pull-right btn-primary">Ver Mais</button>
         </div>
     </div>
 </div>

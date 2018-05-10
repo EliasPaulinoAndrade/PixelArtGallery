@@ -19,3 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/peca', 'PecaController');
+Route::resource('/usuario', 'UsuarioController');
+Route::post('/usuario/{id}/seguir', 'UsuarioController@seguir')->name("usuario.seguir");
+Route::resource('/comentario', 'ComentarioController');

@@ -42,6 +42,12 @@
                                         Submeter Peça
                                     </a>
                                 </li>
+                                <li class="">
+                                    <a href="/usuario/{{Auth::user()->id}}">
+                                        <i class="fa fa-user"></i>
+                                        Meu Perfil
+                                    </a>
+                                </li>
                             @endif
                         </ul>
                     </div>
