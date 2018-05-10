@@ -14,12 +14,14 @@ XAMMP é um conjunto de softwares, includindo o servidor Apache e o mysql, que v
 * ### QFModel
 Como não podemos usar os metodos de banco de dados no model do Laravel. Estamos fazendo alguns metodos/classes customizados para mapeamento do banco, contido em App\QFEloquent. Uso:
 
-* em construção....
+* Quando você extende um QFModel, você tem acesso a funções de mapeamento como: mySave(), que salva o modelo no banco, myFind($id) que busca a linha no banco e transforma em objeto e $myUpdate(), que atualiza um registro no banco.
+* Cada modelo tem três tipos de relacionamento: myhasMany, mybelongsTo, mybelongsToMany, que representam os relacionamentos entre duas entidades, nesses relacionamentos tempos a função get(), que busca os dados do lado oposto do relacionamento. Por exemplo: buscar posts de um usuario. Em alguns dos relacionamentos, alem desse metodo tempos, o add(), para adicionar um dado ao relacionamento, check() checa se relacionamento existe, count() conta quandos relacionamentos existem com o modelo e etc.
+ 
 
-* ##### Adminlte
+* ### Adminlte
 Adminlte é um template usado para dashboars, contém com varios estilos e layouts predefinidos. Laravel-AdminLTE(https://github.com/jeroennoten/Laravel-AdminLTE#5-configuration) é a integração desse template com o laravel. Vai nos ajudar  a fazer a interface gráfica rapidamente.
 
-* ##### Esquema do banco de dados  
+* ### Esquema do banco de dados  
 ![Image of Yaktocat](https://i.imgur.com/8H5PAR3g.png)
 
 esquema feito usando schema-designer: https://github.com/Agontuk/schema-designer
