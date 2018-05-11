@@ -92,6 +92,10 @@
                     <!-- /.post -->
         </div>
         <div class="box-footer">
+            <span class=" text-capitalize" style="margin-left: 15px; line-height: 30px; max-height: 30px; overflow:hidden; display:block">
+                <span class="box-title"><b>Avaliacao: </b></span>
+            </span>
+            <br>
             <div style="text-align: center">
                 <input form="submitForm" name="avaliacao" style="width: 95%; display: inline-block" type="text" value="0" class="slider form-control"
                 data-slider-step="1" data-slider-value="{{$avaliacao==null?3:$avaliacao->nota}}" data-slider-orientation="horizontal" data-slider-handle="square"
@@ -105,7 +109,7 @@
     <div class="box box-primary box-solid">
     
         <div class="box-footer">
-            <span class=" text-capitalize" style="line-height: 30px; max-height: 30px; overflow:hidden; display:block">
+            <span class=" text-capitalize" style="margin-left: 15px; line-height: 30px; max-height: 30px; overflow:hidden; display:block">
                 <span class="box-title"><b>Comentarios</b></span>
             </span>
         </div>
@@ -139,6 +143,7 @@
             </div>
         </div>
         </div>
+        @if(Auth::user() != null)
         <div class="box-footer">
             <br>
              {{ Form::open(['id' => 'submitForm', 'method' => 'POST', 'route' => ['comentario.store']]) }}
@@ -152,6 +157,7 @@
                 
             {{ Form::close() }}
         </div>
+        @endif
     </div>
 </div>
 @stop

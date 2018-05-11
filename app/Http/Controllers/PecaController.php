@@ -61,13 +61,13 @@ class PecaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        
+    {        
         $peca = Peca::myFind($id);
 
-
-        $avaliacao = Avaliacao::getAvaliacaoByAutorAndPeca(Auth::user()->id, $peca->id);
-
+        $avaliacao = null;
+        if(Auth::user() != null){
+            $avaliacao = Avaliacao::getAvaliacaoByAutorAndPeca(Auth::user()->id, $peca->id);
+        }
         return view('peca', compact("peca", "avaliacao")); 
     }
 
