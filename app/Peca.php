@@ -55,7 +55,6 @@ class Peca extends QFModel
         
         $pecasByEvaluationResult = null;
 
-        //dd($query);
         if($limit != null){
             $pecasByEvaluationResult = DB::select($query." limit $limit");
         }
@@ -68,5 +67,20 @@ class Peca extends QFModel
             array_push($pecasByEvaluation ,QFModel::rowQueryToModel($row, Peca::class));
         }
         return $pecasByEvaluation;
+    }
+
+    public function getAVGAvaliacoes(){
+        $selectQuery = "SELECT AVG(nota) as sum " 
+                      ."FROM avaliacaos, pecas "
+                      ."WHERE pecas.id = avaliacaos.peca_id "
+                      ."AND pecas.id = $this->id "
+                      ."GROUP BY pecas.id";
+
+        $result = DB::select($selectQuery);
+        if(sizeof($result) == 0){
+            return 0;
+        }
+
+        return $result[0]->sum;
     }
 }

@@ -19,14 +19,18 @@
             </span>
         </div>
         <div class="box-body">
-            @foreach($pecasByDate as $peca)
-                <a href = "/peca/{{$peca->id}}">
-                <img src="/storage/pecas_images/{{$peca->imagem}}" alt="..." class="margin" width = 100>
-                </a>
+            @foreach($pecasByDate as $peca) 
+                <div style="display: inline-block; text-align: center">
+                    <a href = "/peca/{{$peca->id}}">
+                        <img src="/storage/pecas_images/{{$peca->imagem}}" alt="..." class="margin" width = 100>
+                    </a>
+                    <br>
+                    <span class="box-title"><b>{{$peca->nome}}</b></span>
+                </div>    
             @endforeach
         </div>
         <div class="box-footer">
-            <button type="button" class="btn pull-right btn-primary">Ver Mais</button>
+            <a href="/peca/byDate"><button type="button" class="btn pull-right btn-primary">Ver Mais</button></a>
         </div>
     </div>
 </div>
@@ -40,11 +44,17 @@
         </div>
         <div class="box-body">
             @foreach($pecasByEvaluation as $peca)
-                <img src="/storage/pecas_images/{{$peca->imagem}}" alt="..." class="margin" width = 100>
+                <div style="display: inline-block; text-align: center">
+                    <a href = "/peca/{{$peca->id}}">
+                        <img src="/storage/pecas_images/{{$peca->imagem}}" alt="..." class="margin" width = 100>
+                    </a>
+                    <br>
+                    <span class="box-title"><b>{{$peca->nome}}</b></span>
+                </div>
             @endforeach
         </div>
         <div class="box-footer">
-            <button type="button" class="btn pull-right btn-primary">Ver Mais</button>
+            <a href="/peca/byEvaluation"><button type="button" class="btn pull-right btn-primary">Ver Mais</button></a>
         </div>
     </div>
 </div>

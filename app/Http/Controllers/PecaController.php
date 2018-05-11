@@ -121,4 +121,17 @@ class PecaController extends Controller
 
         return redirect("/home");
     }
+
+    public function pecasByDate(){
+        $pecas = Peca::getSortedByDate(); 
+
+        return view('pecas', compact("pecas", "title"));
+    }
+
+    public function pecasByEvaluation(){
+        $pecas = Peca::getBestEvalueted();
+
+        return view('pecas', compact("pecas", "title"));
+    }
+
 }

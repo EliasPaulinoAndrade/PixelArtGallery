@@ -26,8 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $pecasByDate = Peca::getSortedByDate($limit = 15);
-        $pecasByEvaluation = Peca::getBestEvalueted($limit = 15);
+        $pecasByDate = Peca::getSortedByDate($limit = 20);
+        $pecasByEvaluation = Peca::getBestEvalueted($limit = 20);
 
         
         return view('home', compact("pecasByDate", "pecasByEvaluation"));

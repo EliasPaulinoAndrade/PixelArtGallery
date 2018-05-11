@@ -76,15 +76,17 @@ class UsuarioController extends Controller
             return redirect("/usuario/$usuario->id");
         }
 
-        $imageFile = $request->file('imagem');
-        $imageExtension = $imageFile->extension();
-        $imageName = $usuario->id . "." . $imageExtension;
-        $imageFile->storeAs('public/perfil_images/', $imageName);
-
         $usuario->nome = $request->nome;
         $usuario->email = $request->email;
         $usuario->descricao = $request->descricao;
-        $usuario->img_perfil = $imageName;
+
+        $imageFile = $request->file('imagem');
+        if($imageFile != null){
+            $imageExtension = $imageFile->extension();
+            $imageName = $usuario->id . "." . $imageExtension;
+            $imageFile->storeAs('public/perfil_images/', $imageName);
+            $usuario->img_perfil = $imageName;
+        }
         $usuario->myUpdate();
 
 

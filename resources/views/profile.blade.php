@@ -32,6 +32,12 @@
                 <li class="list-group-item">
                   <b>Seguindo</b> <a class="pull-right">{{$usuario->seguindo()->count()}}</a>
                 </li>
+                <li class="list-group-item">
+                  <b>Comentarios Feitos</b> <a class="pull-right">{{$usuario->comentarios()->count()}}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Obras Postadas</b> <a class="pull-right">{{$usuario->pecas()->count()}}</a>
+                </li>
               </ul>
               @if(Auth::user() && Auth::user()->id != $usuario->id)
                 {{ Form::open(['method' => 'POST', 'route' => ['usuario.seguir', $usuario->id]]) }}
@@ -55,7 +61,7 @@
           <!-- About Me Box -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">About Me</h3>
+              <h3 class="box-title">Sobre Mim</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -75,12 +81,14 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Obras</a></li>
               <li><a href="#timeline" data-toggle="tab">Ultimos Comentarios</a></li>
+              <li><a href="#seguidores" data-toggle="tab">Seguidores</a></li>
+              <li><a href="#seguindo" data-toggle="tab">Seguindo</a></li>
 
               @if(Auth::user() && Auth::user()->id == $usuario->id)
                 <li><a href="#settings" data-toggle="tab">Configurações</a></li>
               @endif
             </ul>
-            <div class="tab-content">
+            <div class="tab-content"  style="margin:15px">
               <div class="tab-pane" id="timeline">
                 @foreach($usuario->comentarios()->get($limit = 10) as $comentario)
                     <!-- Post -->
@@ -111,6 +119,34 @@
                     <img src="/storage/pecas_images/{{$peca->imagem}}" alt="..." class="margin" width="100">
                     </a>
                 @endforeach
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="seguidores">
+                <!-- The timeline -->
+                <div class="row">
+                @foreach($usuario->seguidores()->get() as $seguidor)
+                  <div class="col-sm-12 col-md-6">
+                    <a href="/usuario/{{$seguidor->id}}">
+                    <img src="/storage/perfil_images/{{$seguidor->img_perfil}}" alt="..." class="margin" width="100" style="vertical-align:top">
+                    </a>
+                    <span class="box-title"><b>{{$seguidor->nome}}</b></span>
+                  </div>
+                @endforeach
+                </div>
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="seguindo">
+                <!-- The timeline -->
+                <div class="row">
+                @foreach($usuario->seguindo()->get() as $usuarioSeguindo)
+                  <div class="col-sm-12 col-md-6">
+                    <a href="/usuario/{{$seguidor->id}}">
+                    <img src="/storage/perfil_images/{{$usuarioSeguindo->img_perfil}}" alt="..." class="margin" width="100" style="vertical-align:top">
+                    </a>
+                    <span class="box-title"><b>{{$usuarioSeguindo->nome}}</b></span>
+                  </div>
+                @endforeach
+                </div>
               </div>
               <!-- /.tab-pane -->
               @if(Auth::user() && Auth::user()->id == $usuario->id)
