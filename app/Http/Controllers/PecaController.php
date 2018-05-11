@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Peca;
+use App\Avaliacao;
 use Carbon\Carbon;
 use Auth;
 
@@ -63,7 +64,11 @@ class PecaController extends Controller
     {
         
         $peca = Peca::myFind($id);
-        return view('peca', compact("peca")); 
+
+
+        $avaliacao = Avaliacao::getAvaliacaoByAutorAndPeca(Auth::user()->id, $peca->id);
+
+        return view('peca', compact("peca", "avaliacao")); 
     }
 
     /**
@@ -75,7 +80,6 @@ class PecaController extends Controller
     public function edit($id)
     {
         $peca = Peca::myFind($id);
-
         return view('edit', compact("peca")); 
     }
 
@@ -109,6 +113,12 @@ class PecaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $peca = Peca::myFind($id);
+        if($peca->autor_id != Auth::user()->id){
+            return redirect("/home");
+        }
+        $peca->myDelete();
+
+        return redirect("/home");
     }
 }

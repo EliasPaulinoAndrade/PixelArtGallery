@@ -19,7 +19,7 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="/storage/pecas_images/{{$usuario->img_perfil}}" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="/storage/perfil_images/{{$usuario->img_perfil}}" alt="User profile picture">
 
               <h3 class="profile-username text-center">{{$usuario->nome}}</h3>
 
@@ -27,10 +27,10 @@
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>Followers</b> <a class="pull-right">1,322</a>
+                  <b>Seguidores</b> <a class="pull-right">{{$usuario->seguidores()->count()}}</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Following</b> <a class="pull-right">543</a>
+                  <b>Seguindo</b> <a class="pull-right">{{$usuario->seguindo()->count()}}</a>
                 </li>
               </ul>
               @if(Auth::user() && Auth::user()->id != $usuario->id)
@@ -38,7 +38,11 @@
                     {!! csrf_field() !!}
                     <button type="submit" class="btn btn-primary btn-block">
                         <b>
-                            Seguir
+                            @if(Auth::user()->seguindo()->check($usuario->id))
+                              Deixar de Seguir
+                            @else
+                              Seguir
+                            @endif
                         </b>
                     </button>
                 {{ Form::close() }}
@@ -70,7 +74,7 @@
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Obras</a></li>
-              <li><a href="#timeline" data-toggle="tab">Comentarios</a></li>
+              <li><a href="#timeline" data-toggle="tab">Ultimos Comentarios</a></li>
 
               @if(Auth::user() && Auth::user()->id == $usuario->id)
                 <li><a href="#settings" data-toggle="tab">Configurações</a></li>
@@ -78,11 +82,11 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane" id="timeline">
-                @foreach($usuario->comentarios()->get() as $comentario)
+                @foreach($usuario->comentarios()->get($limit = 10) as $comentario)
                     <!-- Post -->
                     <div class="post">
                     <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="/storage/pecas_images/{{$usuario->img_perfil}}" alt="user image">
+                        <img class="img-circle img-bordered-sm" src="/storage/perfil_images/{{$usuario->img_perfil}}" alt="user image">
                             <span class="username">
                                 <span>{{$usuario->nome}}</span>
                             </span>
@@ -90,7 +94,7 @@
                     </div>
                     <!-- /.user-block -->
                     <p>
-                        {{$comentario->descricao}}
+                        {!!$comentario->descricao!!}
                     </p>
                     <ul class="list-inline">
                         <li><a href="/peca/{{$comentario->peca_id}}" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Ver Obra</a></li>
@@ -111,7 +115,7 @@
               <!-- /.tab-pane -->
               @if(Auth::user() && Auth::user()->id == $usuario->id)
               <div class="tab-pane" id="settings">
-                {{ Form::open(['class' => 'form-horizontal', 'method' => 'PUT', 'route' => ['usuario.update', $usuario->id]]) }}
+                {{ Form::open(['files' => true, 'class' => 'form-horizontal', 'method' => 'PUT', 'route' => ['usuario.update', $usuario->id]]) }}
                 
                     {!! csrf_field() !!}
                   <div class="form-group">
@@ -133,6 +137,13 @@
 
                     <div class="col-sm-10">
                       <textarea class="form-control" id="inputExperience" placeholder="Experience" name="descricao">{{$usuario->descricao}}</textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputExperience" class="col-sm-2 control-label">Imagem</label>
+
+                    <div class="col-sm-10">
+                      <input type="file" name="imagem">  
                     </div>
                   </div>
                   <div class="form-group">

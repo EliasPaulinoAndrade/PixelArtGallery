@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comentario;
+use App\Avaliacao;
 use Carbon\Carbon;
 use Auth;
 
@@ -42,10 +43,17 @@ class ComentarioController extends Controller
         $comentario->autor_id = Auth::user()->id;
         $comentario->mySave();
 
+        $avaliacao = Avaliacao::getAvaliacaoByAutorAndPeca(Auth::user()->id, $request->peca_id);
+
+        if($avaliacao == null){
+            $avaliacao = new Avaliacao(['nota' => $request->avaliacao, 'autor_id' => Auth::user()->id, 'peca_id' => $request->peca_id]);
+            $avaliacao->mySave();
+        }
+        else{
+            $avaliacao->nota = $request->avaliacao;
+            $avaliacao->myUpdate();
+        }
         return redirect("/peca/$comentario->peca_id");
-
-
-
     }
 
     /**

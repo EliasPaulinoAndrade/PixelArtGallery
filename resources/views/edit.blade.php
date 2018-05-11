@@ -2,9 +2,9 @@
 
 @section('title', 'Galeria de Arte')
 
-@section('content_header')
-
-@stop
+@section('css')
+  <link rel="stylesheet" href="{{ URL::asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+@stop()
 
 @section('content')
 <div class="box-body">
@@ -22,7 +22,7 @@
                         <input type="text" name="nome" class="form-control" id="tituloNovo" placeholder="Digite O Nome ..." value = "{{$peca->nome}}">
                         <br>
                         <label for="exampleInputEmail1">Descricao: </label>
-                        <textarea type="text" name="descricao" class="form-control" id="tituloNovo" placeholder="Digite O Nome ...">{{$peca->nome}}</textarea>
+                        <textarea type="text" name="descricao" class="form-control textarea" id="tituloNovo" placeholder="Digite O Nome ...">{{$peca->descricao}}</textarea>
                         
                     </div>
                 </div>
@@ -34,4 +34,16 @@
     </div>
 </div>
 
+@stop
+@section('adminlte_js')
+    <script type="text/javascript" src="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+
+    <script>
+    $(function () {
+        $('.textarea').wysihtml5({
+            toolbar: { fa: true }
+        })
+    })
+    </script>
 @stop

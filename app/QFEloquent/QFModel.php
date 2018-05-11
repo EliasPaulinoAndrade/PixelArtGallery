@@ -102,6 +102,18 @@ class QFModel extends Model
         return DB::update($updateQuery);
     }
 
+    public function myDelete(){
+        if($this->id == null){
+            return 0;
+        }
+
+        $thisClassNameAbs = get_class($this);
+        $tableName = QFDBHelper::tableNameFromClass($thisClassNameAbs);
+
+        $deleteQuery = "DELETE FROM $tableName WHERE id = $this->id";
+        return DB::delete($deleteQuery);
+    }
+
     public static function rowQueryToModel($row, $className){
         /*retorna a instancia de uma classe a partir de uma row resultante de uma query*/
 

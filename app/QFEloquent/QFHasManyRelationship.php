@@ -17,11 +17,15 @@ class QFHasManyRelationship implements QFRelationship{
         }
     }
 
-    public function get(){
+    public function get($limit = null){
         $oneSideTableName = QFDBHelper::tableNameFromClass($this->oneSide);
         $manySideTableName = QFDBHelper::tableNameFromClass($this->manySide);
 
         $selectQuery = "SELECT * FROM $manySideTableName WHERE $manySideTableName.$this->oneSideIdName = $this->id";
+        if($limit != null){
+            $selectQuery = $selectQuery." limit $limit";
+        }
+        
         $result = DB::select($selectQuery);
 
         $modelResult = [];
@@ -32,6 +36,30 @@ class QFHasManyRelationship implements QFRelationship{
         return $modelResult;
     }
 
+    public function count(){
+        
+        $manySideTableName = QFDBHelper::tableNameFromClass($this->manySide);
+
+        $countQuery = "SELECT count(*) AS count " 
+                     ."FROM $manySideTableName " 
+                     ."WHERE $manySideTableName.$this->oneSideIdName = $this->id " 
+                     ."GROUP BY $manySideTableName.$this->oneSideIdName";
+
+        $result = DB::select($countQuery);
+
+        if(sizeof($result) == 0){
+            return 0;
+        }
+        return $result[0]->count;
+    }
+
+    public function check($otherId){
+        $manySideTableName = QFDBHelper::tableNameFromClass($this->manySide);
+
+        $checkQuery = "SELECT * FROM $manySideTableName WHERE $manySideTableName.$this->oneSideIdName = $this->id AND $manySideTableName.id = $otherId";
+        $result = DB::select($checkQuery);
+        return sizeof($result) == 0? false : true;
+    }
 }
 
 ?>

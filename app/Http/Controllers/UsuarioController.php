@@ -19,8 +19,12 @@ class UsuarioController extends Controller
 
     public function seguir($id){
         $usuario = Auth::user();
-        $usuario->seguindo()->add($id);
-
+        if(!$usuario->seguindo()->check($id)){
+            $usuario->seguindo()->add($id);
+        }
+        else{
+            $usuario->seguindo()->remove($id);
+        }
         return redirect("/usuario/$id");
     }
 
@@ -71,10 +75,16 @@ class UsuarioController extends Controller
         if(Auth::user()->id != $usuario->id){
             return redirect("/usuario/$usuario->id");
         }
+
+        $imageFile = $request->file('imagem');
+        $imageExtension = $imageFile->extension();
+        $imageName = $usuario->id . "." . $imageExtension;
+        $imageFile->storeAs('public/perfil_images/', $imageName);
+
         $usuario->nome = $request->nome;
         $usuario->email = $request->email;
         $usuario->descricao = $request->descricao;
-
+        $usuario->img_perfil = $imageName;
         $usuario->myUpdate();
 
 

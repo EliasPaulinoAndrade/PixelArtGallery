@@ -25,8 +25,13 @@ class QFBelongsToManyRelationship implements QFRelationship{
 
     }
 
-    public function get(){
-        $selectQuery = "SELECT * FROM $this->tableName WHERE $this->tableName.$this->thisSideIdName = $this->id";
+    public function get($limit = null){
+        $selectQuery = "SELECT * FROM $this->tableName " 
+                      ."WHERE $this->tableName.$this->thisSideIdName = $this->id";
+        if($limit != null){
+            $selectQuery = $selectQuery." limit $limit";
+        }
+
         $result = DB::select($selectQuery);
         
         $modelResult = [];
@@ -46,6 +51,31 @@ class QFBelongsToManyRelationship implements QFRelationship{
         return DB::insert($addQuery);
     }
 
+    public function remove($otherId){
+        $removeQuery = "DELETE FROM $this->tableName WHERE $this->thisSideIdName = $this->id AND $this->otherSideIdName = $otherId";
+        return DB::delete($removeQuery);
+    }
+
+    public function count(){
+        $otherSideTableName = QFDBHelper::tableNameFromClass($this->otherSide);
+        $countQuery = "SELECT count(*) AS count " 
+                     ."FROM $otherSideTableName, $this->tableName " 
+                     ."WHERE $this->tableName.$this->thisSideIdName = $this->id " 
+                     ."AND $this->tableName.$this->otherSideIdName = $otherSideTableName.id "
+                     ."GROUP BY $this->tableName.$this->thisSideIdName";
+
+        $result = DB::select($countQuery);
+        if(sizeof($result) == 0){
+            return 0;
+        }
+        return $result[0]->count;
+    }
+
+    public function check($otherId){
+        $checkQuery = "SELECT * FROM $this->tableName WHERE $this->otherSideIdName = $otherId AND $this->thisSideIdName = $this->id";
+        $result = DB::select($checkQuery);
+        return sizeof($result) == 0? false : true;
+    }
 }
 
 ?>
