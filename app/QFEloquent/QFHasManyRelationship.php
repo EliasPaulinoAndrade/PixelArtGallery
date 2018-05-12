@@ -3,11 +3,13 @@
 namespace App\QFEloquent;
 use DB;
 
-/*representa o relacionamento de "ser dono de varios"*/
+/*representa o relacionamento de "ser dono de varios" ou "um para muitos" */
+
 class QFHasManyRelationship implements QFRelationship{
     private $id, $oneSide, $manySide, $oneSideIdName;
 
-    public function __construct($id, $oneSide, $manySide, $oneSideName = null){
+    public function __construct($id, $oneSide, $manySide, $oneSideName = null)
+    {
         $this->id = $id;
         $this->oneSide = $oneSide;
         $this->manySide = $manySide;
@@ -17,7 +19,10 @@ class QFHasManyRelationship implements QFRelationship{
         }
     }
 
-    public function get($limit = null){
+    public function get($limit = null)
+    {
+        /*percorre o lado "muitos" buscando as rows relacionadas ao lado "um" */
+
         $oneSideTableName = QFDBHelper::tableNameFromClass($this->oneSide);
         $manySideTableName = QFDBHelper::tableNameFromClass($this->manySide);
 
@@ -36,8 +41,11 @@ class QFHasManyRelationship implements QFRelationship{
         return $modelResult;
     }
 
-    public function count(){
-        
+    public function count()
+    {
+        /*retorna o numeros de rows do outro lado do relacionamento, no caso a quantidade 
+        de rows do lado "muitos" relacionadas ao lado "um"*/
+
         $manySideTableName = QFDBHelper::tableNameFromClass($this->manySide);
 
         $countQuery = "SELECT count(*) AS count " 
@@ -53,7 +61,11 @@ class QFHasManyRelationship implements QFRelationship{
         return $result[0]->count;
     }
 
-    public function check($otherId){
+    public function check($otherId)
+    {
+        /*checa se relacionamento existe, percorre o lado "muitos" buscando algum que pertenca 
+        ao lado "um" */
+
         $manySideTableName = QFDBHelper::tableNameFromClass($this->manySide);
 
         $checkQuery = "SELECT * FROM $manySideTableName WHERE $manySideTableName.$this->oneSideIdName = $this->id AND $manySideTableName.id = $otherId";

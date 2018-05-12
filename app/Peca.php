@@ -28,7 +28,10 @@ class Peca extends QFModel
         return $this->myHasMany(Avaliacao::class);
     }
 
-    public static function getSortedByDate($limit = null, $offset = null){
+    public static function getSortedByDate($limit = null, $offset = null)
+    {
+        /*busca pecas ordenadas por data, a query pode ser limtiada*/
+
         $query = "SELECT * from pecas ORDER BY data";
         $query = $limit != null? $query." LIMIT $limit" : $query;
         $query = $offset != null? $query." OFFSET $offset" : $query;
@@ -43,7 +46,10 @@ class Peca extends QFModel
         return $pecasByDate;
     }
 
-    public static function getBestEvalueted($limit = null, $offset = null){
+    public static function getBestEvalueted($limit = null, $offset = null)
+    {
+        /*busca pecas por melhor avaliacao, faz a media das avaliacoes de uma obra, e ordena por ela*/
+
         $query = "SELECT pecas.*, AVG(nota) AS avgnota " 
                 ."FROM pecas, avaliacaos " 
                 ."WHERE pecas.id = avaliacaos.peca_id " 
@@ -62,7 +68,10 @@ class Peca extends QFModel
         return $pecasByEvaluation;
     }
 
-    public function getAVGAvaliacoes(){
+    public function getAVGAvaliacoes()
+    {
+        /*retorna a media de avaliacoes da obra*/
+
         $selectQuery = "SELECT AVG(nota) as sum " 
                       ."FROM avaliacaos, pecas "
                       ."WHERE pecas.id = avaliacaos.peca_id "

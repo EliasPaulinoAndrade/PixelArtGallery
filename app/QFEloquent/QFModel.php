@@ -33,8 +33,10 @@ class QFModel extends Model
         return $classInstance;
     }
 
-    public function mySave(){
+    public function mySave()
+    {
         /*salva um modelo no banco, se ele ja tiver id, redireciona para o update*/
+
         if($this->id != null){
             return $this->myUpdate();
         }
@@ -71,8 +73,10 @@ class QFModel extends Model
         return $insertResult;
     }
 
-    public function myUpdate(){
+    public function myUpdate()
+    {
         /*atualiza um modelo no banco, se ele nao tiver id ainda, redireciona para o salvar*/
+    
         if($this->id == null){
             return $this->mySave();
         }
@@ -102,7 +106,10 @@ class QFModel extends Model
         return DB::update($updateQuery);
     }
 
-    public function myDelete(){
+    public function myDelete()
+    {
+        /*deleta o registor de um modelo no banco*/
+
         if($this->id == null){
             return 0;
         }
@@ -130,14 +137,22 @@ class QFModel extends Model
     /*para cada chamada de relacionamento é criado um objeto de guarda as informacoes de relacionamento
     e faz queries com base nele*/
     public function myHasMany($otherClass, $oneSideIdName = null){
+
+        /*retorna uma nova instancia de um modelo de relacionamento um para muitos*/
         return new QFHasManyRelationship($this->id, get_class($this), $otherClass, $oneSideIdName);
     }
 
     public function myBelongsTo($otherClass, $oneSideIdName = null){
+
+        /*retorna uma nova instancia de um modelo de relacionamento muitos para um*/
+
         return new QFBelongsToRelationship($this->id, $otherClass, get_class($this), $oneSideIdName);
     }
 
     public function myBelongsToMany($otherClass, $tableName, $thisSideName = null, $otherSideName = null){
+        
+        /*retorna uma nova instancia de um modelo de relacionamento muitos para muitos*/
+
         return new QFBelongsToManyRelationship($this->id, get_class($this), $otherClass, $tableName, $thisSideName, $otherSideName);
     }
 }

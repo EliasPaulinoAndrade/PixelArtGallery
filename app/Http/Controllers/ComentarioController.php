@@ -38,6 +38,8 @@ class ComentarioController extends Controller
      */
     public function store(Request $request)
     {
+        /*salva um comentario e uma avaliacao no banco*/
+
         $comentario = new Comentario($request->all());
         $comentario->data = Carbon::now();
         $comentario->autor_id = Auth::user()->id;
@@ -45,6 +47,7 @@ class ComentarioController extends Controller
 
         $avaliacao = Avaliacao::getAvaliacaoByAutorAndPeca(Auth::user()->id, $request->peca_id);
 
+        /*se ja houver avaliacao, da update, se nao, cria uma*/
         if($avaliacao == null){
             $avaliacao = new Avaliacao(['nota' => $request->avaliacao, 'autor_id' => Auth::user()->id, 'peca_id' => $request->peca_id]);
             $avaliacao->mySave();

@@ -20,6 +20,8 @@ class Avaliacao extends QFModel
     }
 
     public static function getAvaliacaoByAutorAndPeca($autorId, $pecaId){
+        /*busca uma avaliacao que relaciona autor e peca*/
+
         $selectQuery = "SELECT * FROM avaliacaos WHERE autor_id = $autorId AND peca_id = $pecaId";
         $result = DB::select($selectQuery);
 

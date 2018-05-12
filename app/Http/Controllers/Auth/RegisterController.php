@@ -63,7 +63,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $usuario = new Usuario(['nome' => $data['nome'], 'sobrenome' => $data['sobrenome'],'email' => $data['email'], 'senha' => bcrypt($data['password'])]);
+        $usuario = new Usuario(['nome' => $data['nome'], 
+                                'sobrenome' => $data['sobrenome'],
+                                'email' => $data['email'], 
+                                'senha' => bcrypt($data['password'])]
+                                );
         $usuario->mySave();
 
         return $usuario;

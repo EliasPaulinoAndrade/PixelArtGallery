@@ -10,33 +10,18 @@ use Auth;
 
 class PecaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(){
-       
+        /*mostra o formulario de submicao de obras*/
+
         return view('submit'); 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
+        /*salva uma peca, jutamente com a image, que é salva na pasta storage, 
+        usando o id da peca criada*/
+
         $peca = new Peca($request->all());
         $peca->data = Carbon::now();
         $peca->autor_id = Auth::user()->id;
@@ -54,14 +39,10 @@ class PecaController extends Controller
         return redirect("/peca/$peca->id");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {        
+        /*busca a peca e uma avaliacao dela feita pelo usuario logado, se houver retorna*/
+
         $peca = Peca::myFind($id);
 
         $avaliacao = null;
@@ -71,27 +52,17 @@ class PecaController extends Controller
         return view('peca', compact("peca", "avaliacao")); 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
+        /*motra o formulario de edição de uma peca*/
+
         $peca = Peca::myFind($id);
         return view('edit', compact("peca")); 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        /*busca a peca pelo id, atualiza seus campos e a salva */
         $peca = Peca::myFind($id);
         if($peca->autor_id != Auth::user()->id){
             return redirect("/home");
@@ -105,14 +76,10 @@ class PecaController extends Controller
         return redirect("/peca/".$peca->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
+        /*remove uma peca do banco de dados*/
+        
         $peca = Peca::myFind($id);
         if($peca->autor_id != Auth::user()->id){
             return redirect("/home");
@@ -122,7 +89,11 @@ class PecaController extends Controller
         return redirect("/home");
     }
 
-    public function pecasByDate($begin, $end){
+    public function pecasByDate($begin, $end)
+    {
+        /*retorna peças por update, o $title vai ser mostrado no header da pagina, o $id diz qual
+        controller chamou a pagina*/
+
         $pecas = Peca::getSortedByDate($limit = $end - $begin, $offset = $begin); 
 
         $title = "Obras Mais Recentes";
@@ -136,7 +107,11 @@ class PecaController extends Controller
         return view('pecas', compact("pecas", "title", "currentLimit", "id"));
     }
 
-    public function pecasByEvaluation($begin, $end){
+    public function pecasByEvaluation($begin, $end)
+    {
+
+        /*retorna pecas com melhor avaliacao, se houver avaliacao*/
+
         $pecas = Peca::getBestEvalueted($limit = $end, $offset = $begin);
 
         $title = "Obras Mais Votadas";

@@ -47,16 +47,16 @@
         },
         "positions": {
             "azy6bf": {
-                "x": 524,
-                "y": 45
+                "x": 527,
+                "y": 32
             },
             "q2r3ti": {
                 "x": 458,
                 "y": 367
             },
             "cdl59": {
-                "x": 735,
-                "y": 376
+                "x": 917,
+                "y": 268
             },
             "cxexwk": {
                 "x": 57,
@@ -225,6 +225,29 @@
             {
                 "id": "le13ua",
                 "name": "img_perfil",
+                "type": "string",
+                "length": "",
+                "defValue": "",
+                "comment": "",
+                "autoInc": false,
+                "nullable": false,
+                "unique": false,
+                "index": false,
+                "unsigned": false,
+                "foreignKey": {
+                    "references": {
+                        "id": "",
+                        "name": ""
+                    },
+                    "on": {
+                        "id": "",
+                        "name": ""
+                    }
+                }
+            },
+            {
+                "id": "ozw5x9",
+                "name": "sobrenome",
                 "type": "string",
                 "length": "",
                 "defValue": "",
@@ -478,6 +501,29 @@
                         "name": "pecas"
                     }
                 }
+            },
+            {
+                "id": "uds3r",
+                "name": "autor_id",
+                "type": "integer",
+                "length": "",
+                "defValue": "",
+                "comment": "",
+                "autoInc": false,
+                "nullable": false,
+                "unique": true,
+                "index": false,
+                "unsigned": true,
+                "foreignKey": {
+                    "references": {
+                        "id": "49uxma",
+                        "name": "id"
+                    },
+                    "on": {
+                        "id": "azy6bf",
+                        "name": "usuarios"
+                    }
+                }
             }
         ],
         "cxexwk": [
@@ -678,6 +724,16 @@
             "source": {
                 "columnId": "fsocep",
                 "tableId": "61bgco"
+            },
+            "target": {
+                "columnId": "49uxma",
+                "tableId": "azy6bf"
+            }
+        },
+        {
+            "source": {
+                "columnId": "uds3r",
+                "tableId": "cdl59"
             },
             "target": {
                 "columnId": "49uxma",

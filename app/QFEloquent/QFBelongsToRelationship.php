@@ -8,7 +8,8 @@ class QFBelongsToRelationship implements QFRelationship{
 
     private $id, $oneSide, $manySide, $oneSideIdName;
 
-    public function __construct($id, $oneSide, $manySide, $oneSideName = null){
+    public function __construct($id, $oneSide, $manySide, $oneSideName = null)
+    {
         $this->id = $id;
         $this->oneSide = $oneSide;
         $this->manySide = $manySide;
@@ -18,17 +19,25 @@ class QFBelongsToRelationship implements QFRelationship{
         }
     }
 
-    public function get(){
+    public function get()
+    {
+        /*percorre o lado "um" buscando alguma row com id igual ao do lado "muito" e retorna ela*/
+
         $oneSideTableName = QFDBHelper::tableNameFromClass($this->oneSide);
         $manySideTableName = QFDBHelper::tableNameFromClass($this->manySide);
 
-        $selectQuery = "SELECT * FROM $manySideTableName WHERE $manySideTableName.id = $this->id";
-        
-        $result = DB::select($selectQuery);
-        $oneSideID = $result[0]->{$this->oneSideIdName};
-        $oneSideModel = $this->oneSide::myFind($oneSideID);
+        $selectQuery = "SELECT $oneSideTableName.* FROM $oneSideTableName, $manySideTableName "
+                      ."WHERE $oneSideTableName.id = $manySideTableName.$this->oneSideIdName "
+                      ."AND $manySideTableName.id = $this->id";
 
-        return $oneSideModel;
+        $result = DB::select($selectQuery);
+        if(sizeof($result) == 0){
+            return null;
+        }
+
+        $model = QFModel::rowQueryToModel($result[0], $this->oneSide);
+
+        return $model;
     }
 }
 

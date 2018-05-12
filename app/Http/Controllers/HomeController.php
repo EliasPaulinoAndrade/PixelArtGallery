@@ -26,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /*retorna as pecas por diferentes parametros para home page*/
+
         $pecasByDate = Peca::getSortedByDate($limit = 15);
         $pecasByEvaluation = Peca::getBestEvalueted($limit = 15);
 
