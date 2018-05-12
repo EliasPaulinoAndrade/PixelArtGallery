@@ -97,7 +97,7 @@ class QFModel extends Model
                 else{
                     $updateBeginQuery .= ", ";
                 }
-                $updateBeginQuery .= $columnName . " = '" . $this[$columnName] . "'";
+                $updateBeginQuery .= $columnName . " = \"" . $this[$columnName] . "\"";
             }  
         }
 
