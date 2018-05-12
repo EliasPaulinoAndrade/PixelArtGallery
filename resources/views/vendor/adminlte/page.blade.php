@@ -76,11 +76,11 @@
                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
                                 @if(Auth::user() != null)
                                 <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
-                                    <i class="fa fa-fw fa-sign-out"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                    <i class="fa fa-fw fa-sign-out"></i> Sair
                                 </a>
                                 @else
                                 <a href="{{ url(config('adminlte.login_url', 'auth/login')) }}">
-                                    <i class="fa fa-fw fa-sign-in"></i> {{ Login }}
+                                    <i class="fa fa-fw fa-sign-in"></i> Entrar
                                 </a>
                                 @endif
                             @else
@@ -88,10 +88,10 @@
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     @if(Auth::user() != null)
                                         <i class="fa fa-fw fa-sign-out"></i>
-                                        {{ trans('adminlte::adminlte.log_out') }}
+                                        Sair
                                     @else
                                         <i class="fa fa-fw fa-sign-in"></i>
-                                        Login
+                                        Entrar
                                     @endif
                                 </a>
                                 @if(Auth::user() != null)

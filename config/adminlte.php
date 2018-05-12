@@ -120,11 +120,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Ultimas Obras',
-                    'url'  => '#',
+                    'url'  => '/peca/byDate/0/30'
                 ],
                 [
                     'text'    => 'Mais Votadas',
-                    'url'     => '#',
+                    'url'     => '/peca/byEvaluation/0/30',
                 ],
                 [
                     'text' => 'Level One',
