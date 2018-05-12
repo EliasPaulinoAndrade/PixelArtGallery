@@ -33,6 +33,7 @@ class Peca extends QFModel
         $query = $limit != null? $query." LIMIT $limit" : $query;
         $query = $offset != null? $query." OFFSET $offset" : $query;
         
+
         $pecasByDateResult = DB::select($query);
 
         $pecasByDate = [];

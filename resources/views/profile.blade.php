@@ -23,7 +23,7 @@
 
               <h3 class="profile-username text-center">{{$usuario->nome}}</h3>
 
-              <p class="text-muted text-center">Software Engineer</p>
+              <p class="text-muted text-center">{{$usuario->sobrenome}}</p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
@@ -115,9 +115,15 @@
               <div class="active tab-pane" id="activity">
                 <!-- The timeline -->
                 @foreach($usuario->pecas()->get() as $peca)
-                    <a href="/peca/{{$peca->id}}">
-                    <img src="/storage/pecas_images/{{$peca->imagem}}" alt="..." class="margin" width="100">
+                    <div style="display: inline-block; text-align: center">
+                    <a href = "/peca/{{$peca->id}}">
+                        <div style="display:inline-block; width:100px; height:100px; background-image:url('/storage/pecas_images/{{$peca->imagem}}')"></div>
                     </a>
+                    <br>
+                    <span class="box-title"><b>{{$peca->nome}}</b></span>
+                    <br> 
+                    <div style="display:inline-block; height: 10px"></div>
+                </div>    
                 @endforeach
               </div>
               <!-- /.tab-pane -->
@@ -125,10 +131,11 @@
                 <!-- The timeline -->
                 <div class="row">
                 @foreach($usuario->seguidores()->get() as $seguidor)
-                  <div class="col-sm-12 col-md-6">
+                  <div class="col-sm-12 col-md-3" style="text-align: center">
                     <a href="/usuario/{{$seguidor->id}}">
-                    <img src="/storage/perfil_images/{{$seguidor->img_perfil}}" alt="..." class="margin" width="100" style="vertical-align:top">
+                    <img src="/storage/perfil_images/{{$seguidor->img_perfil}}" alt="..." class="margin" width="120">
                     </a>
+                    <br>
                     <span class="box-title"><b>{{$seguidor->nome}}</b></span>
                   </div>
                 @endforeach
@@ -139,10 +146,11 @@
                 <!-- The timeline -->
                 <div class="row">
                 @foreach($usuario->seguindo()->get() as $usuarioSeguindo)
-                  <div class="col-sm-12 col-md-6">
-                    <a href="/usuario/{{$seguidor->id}}">
-                    <img src="/storage/perfil_images/{{$usuarioSeguindo->img_perfil}}" alt="..." class="margin" width="100" style="vertical-align:top">
+                  <div class="col-sm-12 col-md-3" style="text-align: center">
+                    <a href="/usuario/{{$usuarioSeguindo->id}}">
+                    <img src="/storage/perfil_images/{{$usuarioSeguindo->img_perfil}}" alt="..." class="margin" width="120">
                     </a>
+                    <br>
                     <span class="box-title"><b>{{$usuarioSeguindo->nome}}</b></span>
                   </div>
                 @endforeach

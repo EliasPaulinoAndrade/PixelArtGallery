@@ -25,12 +25,12 @@
                 <a href=""><button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button></a>
                 <div class="pull-right">
                   <span class="username" style="margin-right: 10px">
-                    <a href="#">{{($currentLimit-10)."-".$currentLimit}}</a>
+                    <a href="#">{{($currentLimit-30)."-".$currentLimit}}</a>
                     </span>
                   <div class="btn-group">
-                    <a href= "{{$currentLimit > 10? "/peca/byDate/".($currentLimit - 20)."/".($currentLimit - 10) : "#"}}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button></a>
-                    <a href= "/peca/byDate/{{$currentLimit}}/{{$currentLimit + 10}}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button></a>
-                  </div>
+                    <a href= {{$currentLimit > 30? ("/peca/$id/".($currentLimit - 60)."/".($currentLimit - 30)) : "#"}}><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button></a>
+                    <a href= "/peca/{{$id}}/{{$currentLimit}}/{{$currentLimit + 30}}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button></a>
+                    </div>
                   <!-- /.btn-group -->
                 </div>
                 <!-- /.pull-right -->
@@ -38,10 +38,12 @@
             @foreach($pecas as $peca) 
                 <div style="display: inline-block; text-align: center">
                     <a href = "/peca/{{$peca->id}}">
-                        <img src="/storage/pecas_images/{{$peca->imagem}}" alt="..." class="margin" width = 100>
+                        <div style="display:inline-block; width:100px; height:100px; background-image:url('/storage/pecas_images/{{$peca->imagem}}')"></div>
                     </a>
                     <br>
                     <span class="box-title"><b>{{$peca->nome}}</b></span>
+                    <br> 
+                    <div style="display:inline-block; height: 10px"></div>
                 </div>    
             @endforeach
             <div class="mailbox-controls">
@@ -49,11 +51,11 @@
                 <a href=""><button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button></a>
                  <div class="pull-right">
                   <span class="username" style="margin-right: 10px">
-                    <a href="#">{{($currentLimit-10)."-".$currentLimit}}</a>
+                    <a href="#">{{($currentLimit-30)."-".$currentLimit}}</a>
                     </span>
                   <div class="btn-group">
-                    <a href= "{{$currentLimit > 10? "/peca/byDate/".($currentLimit - 20)."/".($currentLimit - 10) : "#"}}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button></a>
-                    <a href= "/peca/byDate/{{$currentLimit}}/{{$currentLimit + 10}}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button></a>
+                    <a href= {{$currentLimit > 30? ("/peca/$id/".($currentLimit - 60)."/".($currentLimit - 30)) : "#"}}><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button></a>
+                    <a href= "/peca/{{$id}}/{{$currentLimit}}/{{$currentLimit + 30}}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button></a>
                   </div>
                   <!-- /.btn-group -->
                 </div>

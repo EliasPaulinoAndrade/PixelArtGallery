@@ -10,7 +10,7 @@ use App\QFEloquent\QFModel;
 
 class Usuario extends QFModel implements AuthenticatableContract, CanResetPasswordContract
 {
-    protected $fillable = ['email', 'senha', 'img_perfil', 'descricao', 'nome'];
+    protected $fillable = ['email', 'senha', 'img_perfil', 'descricao', 'nome', 'sobrenome'];
     protected $hidden = ['senha'];
     public $timestamps = false;
 

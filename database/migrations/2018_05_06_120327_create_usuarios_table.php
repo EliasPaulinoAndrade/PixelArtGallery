@@ -14,6 +14,7 @@ class CreateUsuariosTable extends Migration
 
             /*campos*/
             $table->string("nome");
+            $table->string("sobrenome");
             $table->string("email")->unique();
             $table->string("senha");
 
