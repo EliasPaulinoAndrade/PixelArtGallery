@@ -28,16 +28,12 @@ class Peca extends QFModel
         return $this->myHasMany(Avaliacao::class);
     }
 
-    public static function getSortedByDate($limit = null){
+    public static function getSortedByDate($limit = null, $offset = null){
         $query = "SELECT * from pecas ORDER BY data";
-        $pecasByDateResult = null;
+        $query = $limit != null? $query." LIMIT $limit" : $query;
+        $query = $offset != null? $query." OFFSET $offset" : $query;
         
-        if($limit != null){
-            $pecasByDateResult = DB::select($query." LIMIT $limit");
-        }
-        else{
-            $pecasByDateResult = DB::select($query);
-        }
+        $pecasByDateResult = DB::select($query);
 
         $pecasByDate = [];
         foreach($pecasByDateResult as $row){
@@ -46,21 +42,17 @@ class Peca extends QFModel
         return $pecasByDate;
     }
 
-    public static function getBestEvalueted($limit = null){
+    public static function getBestEvalueted($limit = null, $offset = null){
         $query = "SELECT pecas.*, AVG(nota) AS avgnota " 
                 ."FROM pecas, avaliacaos " 
                 ."WHERE pecas.id = avaliacaos.peca_id " 
                 ."GROUP BY pecas.id "
                 ."ORDER BY avgnota DESC, pecas.data";
         
-        $pecasByEvaluationResult = null;
+        $query = $limit != null? $query." LIMIT $limit" : $query;
+        $query = $offset != null? $query." OFFSET $offset" : $query;
 
-        if($limit != null){
-            $pecasByEvaluationResult = DB::select($query." limit $limit");
-        }
-        else{
-            $pecasByEvaluationResult = DB::select($query);
-        }
+        $pecasByEvaluationResult = DB::select($query);
 
         $pecasByEvaluation = [];
         foreach($pecasByEvaluationResult as $row){

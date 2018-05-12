@@ -122,14 +122,27 @@ class PecaController extends Controller
         return redirect("/home");
     }
 
-    public function pecasByDate(){
-        $pecas = Peca::getSortedByDate(); 
+    public function pecasByDate($begin, $end){
+        $pecas = Peca::getSortedByDate($limit = $end, $offset = $begin); 
 
-        return view('pecas', compact("pecas", "title"));
+        $title = "Obras Mais Recentes";
+        $currentLimit = $end;
+
+        if(sizeof($pecas) == 0){
+            return redirect("/peca/byDate/0/10");
+        }
+
+        return view('pecas', compact("pecas", "title", "currentLimit"));
     }
 
-    public function pecasByEvaluation(){
-        $pecas = Peca::getBestEvalueted();
+    public function pecasByEvaluation($begin, $end){
+        $pecas = Peca::getBestEvalueted($limit = $end, $offset = $begin);
+
+        $title = "Obras Mais Votadas";
+
+        if(sizeof($pecas) == 0){
+            return redirect("/peca/byDate/0/10");
+        }
 
         return view('pecas', compact("pecas", "title"));
     }

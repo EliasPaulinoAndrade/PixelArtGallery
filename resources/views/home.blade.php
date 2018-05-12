@@ -15,7 +15,7 @@
     <div class="box box-primary box-solid">
         <div class="box-footer">
             <span class=" profile-username text-capitalize" style="line-height: 30px; max-height: 30px; overflow:hidden; display:block">
-                <a href="#" class="text-blue">Peças Mais Novas</a>
+                <a href="#" class="text-blue">Obras Mais Recentes</a>
             </span>
         </div>
         <div class="box-body">
@@ -30,7 +30,7 @@
             @endforeach
         </div>
         <div class="box-footer">
-            <a href="/peca/byDate"><button type="button" class="btn pull-right btn-primary">Ver Mais</button></a>
+            <a href="/peca/byDate/0/10"><button type="button" class="btn pull-right btn-primary">Ver Mais</button></a>
         </div>
     </div>
 </div>
@@ -54,7 +54,7 @@
             @endforeach
         </div>
         <div class="box-footer">
-            <a href="/peca/byEvaluation"><button type="button" class="btn pull-right btn-primary">Ver Mais</button></a>
+            <a href="/peca/byEvaluation/0/10"><button type="button" class="btn pull-right btn-primary">Ver Mais</button></a>
         </div>
     </div>
 </div>

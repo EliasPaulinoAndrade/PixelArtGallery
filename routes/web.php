@@ -19,8 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/peca/byDate', 'PecaController@pecasByDate');
-Route::get('/peca/byEvaluation', 'PecaController@pecasByEvaluation');
+Route::get('/peca/byDate/{begin}/{end}', 'PecaController@pecasByDate');
+Route::get('/peca/byEvaluation/{begin}/{end}', 'PecaController@pecasByEvaluation');
 Route::resource('/peca', 'PecaController');
 
 Route::resource('/usuario', 'UsuarioController');

@@ -8,7 +8,7 @@ $factory->define(Peca::class, function (Faker\Generator $faker) {
         'nome' => $fakerBR->word,
         'data' => $fakerBR->dateTime,
         'descricao' => $fakerBR->realText($maxNbChars = 200),
-        'imagem' => $fakerBR->word.".png",
+        'imagem' => "rand_".$fakerBR->randomElement(["1", "2", "3", "4", '5', '6', '7', '8', '9', '10']).".png",
         'autor_id' => $fakerBR->randomElement(Usuario::all()->pluck('id')->toArray())
     ];
 });

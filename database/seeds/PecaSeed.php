@@ -13,6 +13,6 @@ class PecaSeed extends Seeder
      
     public function run()
     {
-        factory(Peca::class, 8)->create();
+        factory(Peca::class, 50)->create();
     }
 }
