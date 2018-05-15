@@ -22,11 +22,19 @@
                         <input type="text" name="nome" class="form-control" id="tituloNovo" placeholder="Digite O Nome ...">
                         <br>
                         <label for="exampleInputEmail1">Descricao: </label>
-                        <textarea type="text" name="descricao" class="form-control" id="tituloNovo" placeholder="Digite O Nome ..."></textarea>
+                        <textarea type="text" name="descricao" class="form-control" id="tituloNovo" placeholder="Digite Uma Descrição ..."></textarea>
                         <br>
                         <label for="exampleInputEmail1">Imagem: </label>
                         <input type="file" name="imagem">
-                        
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">

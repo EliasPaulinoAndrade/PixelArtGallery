@@ -37,13 +37,13 @@
 
                             @if(Auth::user() != null)
                                 <li class="">
-                                    <a href="/peca/create">
+                                    <a href="{{url('/peca/create')}}">
                                         <i class="fa fa-paper-plane"></i>
                                         Submeter Peça
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="/usuario/{{Auth::user()->id}}">
+                                    <a href="{{url('/usuario')}}/{{Auth::user()->id}}">
                                         <i class="fa fa-user"></i>
                                         Meu Perfil
                                     </a>

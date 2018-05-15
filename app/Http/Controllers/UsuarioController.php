@@ -19,7 +19,7 @@ class UsuarioController extends Controller
 
     public function seguir($id)
     {
-        /*se o usuario logado ja seguir o outro usuario, ele o deixa de seguir, 
+        /*se o usuario logado ja seguir o outro usuario, ele o deixa de seguir,
         se nao, ele passa a seguir*/
 
         $usuario = Auth::user();
@@ -33,20 +33,29 @@ class UsuarioController extends Controller
     }
 
     public function show($id)
-    {   
+    {
         /*retorna um usuario*/
         $usuario = Usuario::myFind($id);
-        return view('profile', compact("usuario")); 
+        return view('profile', compact("usuario"));
     }
 
 
     public function update(Request $request, $id)
     {
         /*atualiza os dados de um usuario, se houver imagem no request, atualiza a imagem*/
+
         $usuario = Usuario::myFind($id);
         if(Auth::user()->id != $usuario->id){
             return redirect("/usuario/$usuario->id");
         }
+        
+        $this->validate($request,
+        [
+            'nome' => 'required|string|max:255',
+            'sobrenome' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:usuarios,email,'.$id.'',
+            'descricao' => 'nullable|string|max:255'
+        ]);
 
         $usuario->nome = $request->nome;
         $usuario->email = $request->email;

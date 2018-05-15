@@ -22,7 +22,7 @@
     <section class="content-header">
         <h1>
             Obra
-        </h1> 
+        </h1>
     </section>
 @stop
 
@@ -57,13 +57,13 @@
         </div>
         <div class="box-body" style="text-align: center">
             <div style="margin:auto; display: inline-block;">
-                <img src="/storage/pecas_images/{{$peca->imagem}}" alt="..." class="img-responsive pad">
+                <img src="{{url('../storage/app/public/pecas_images')}}/{{$peca->imagem}}" alt="..." class="img-responsive pad">
             </div>
         </div>
         @if(Auth::user() && Auth::user()->id == $autor->id)
         <div class="box-footer" style="text-align:center">
             <div style="dispay:inline-block;">
-                <a class="btn btn-app" href = "/peca/{{$peca->id}}/edit">
+                <a class="btn btn-app" href = "{{url('/peca')}}/{{$peca->id}}/edit">
                     <i class="fa fa-edit"></i> Editar
                 </a>
                 <a class="btn btn-app" >
@@ -72,14 +72,14 @@
             </div>
         </div>
         @endif
-        
+
          <div class="box-footer">
             <!-- Post -->
                 <div class="post" style="margin: 15px">
                     <div class="user-block">
-                        <img class="img-bordered-sm" src="/storage/perfil_images/{{$autor->img_perfil}}" alt="user image" style="width:50px; height: 50px; margin-right: 10px">
+                        <img class="img-bordered-sm" src="{{url('storage/perfil_images')}}/{{$autor->img_perfil}}" alt="user image" style="width:50px; height: 50px; margin-right: 10px">
                             <span class="text-muted text-center">
-                            <a href="/usuario/{{$autor->id}}">{{$autor->nome}}</a>
+                            <a href="{{url('/usuario')}}/{{$autor->id}}">{{$autor->nome}}</a>
                             </span>
                         <span class="description">Postado em - 7:30 PM today</span>
                     </div>
@@ -87,7 +87,7 @@
                     <p>
                        {!!$peca->descricao!!}
                     </p>
-                    
+
                     </div>
                     <!-- /.post -->
         </div>
@@ -107,7 +107,7 @@
 </div>
 <div class="box-body">
     <div class="box box-primary box-solid">
-    
+
         <div class="box-footer">
             <span class=" text-capitalize" style="margin-left: 15px; line-height: 30px; max-height: 30px; overflow:hidden; display:block">
                 <span class="box-title"><b>Comentarios</b></span>
@@ -121,9 +121,9 @@
                 <div class="post">
                     <div class="user-block">
                         @php($autor = $comentario->autor()->get())
-                        <img class="img-circle img-bordered-sm" src="/storage/perfil_images/{{$autor->img_perfil}}" alt="user image">
+                        <img class="img-circle img-bordered-sm" src="{{url('storage/perfil_images')}}/{{$autor->img_perfil}}" alt="user image">
                             <span class="username">
-                            <a href="/usuario/{{$autor->id}}">{{$autor->nome}}</a>
+                            <a href="{{url('/usuario')}}/{{$autor->id}}">{{$autor->nome}}</a>
                             </span>
                         <span class="description">Feito em - 7:30 PM today</span>
                     </div>
@@ -134,12 +134,12 @@
 
                     @if(Auth::user() && Auth::user()->id == $autor->id)
                     <ul class="list-inline">
-                        <li><a href="/peca/{{$comentario->peca_id}}" class="link-black text-sm"><i class="fa fa-trash margin-r-5"></i> Deletar</a></li>
+                        <li><a href="{{url('/peca')}}/{{$comentario->peca_id}}" class="link-black text-sm"><i class="fa fa-trash margin-r-5"></i> Deletar</a></li>
                     </ul>
                     @endif
                     </div>
                     <!-- /.post -->
-                @endforeach       
+                @endforeach
             </div>
         </div>
         </div>
@@ -154,7 +154,7 @@
                 <input type="hidden" name="peca_id" value = "{{$peca->id}}">
                 <br>
                 <button type="submit" class="btn btn-primary pull-right btn-flat">Enviar</button>
-                
+
             {{ Form::close() }}
         </div>
         @endif

@@ -6,7 +6,7 @@
     <section class="content-header">
         <h1>
             Inicio
-        </h1> 
+        </h1>
     </section>
 @stop
 
@@ -19,20 +19,20 @@
             </span>
         </div>
         <div class="box-body">
-            @foreach($pecasByDate as $peca) 
+            @foreach($pecasByDate as $peca)
                 <div style="display: inline-block; text-align: center">
-                    <a href = "/peca/{{$peca->id}}">
-                        <div style="display:inline-block; width:100px; height:100px; background-image:url('/storage/pecas_images/{{$peca->imagem}}')"></div>
+                    <a href = "{{url('/peca')}}/{{$peca->id}}">
+                        <img src="{{url('storage/pecas_images')}}/{{$peca->imagem}}" style="display:inline-block; width:100px; height:100px;">
                     </a>
                     <br>
                     <span class="box-title"><b>{{$peca->nome}}</b></span>
-                    <br> 
+                    <br>
                     <div style="display:inline-block; height: 10px"></div>
-                </div>    
+                </div>
             @endforeach
         </div>
         <div class="box-footer">
-            <a href="/peca/byDate/0/30"><button type="button" class="btn pull-right btn-primary">Ver Mais</button></a>
+            <a href="{{url('/peca')}}/byDate/0/30"><button type="button" class="btn pull-right btn-primary">Ver Mais</button></a>
         </div>
     </div>
 </div>
@@ -47,18 +47,18 @@
         <div class="box-body">
             @foreach($pecasByEvaluation as $peca)
                 <div style="display: inline-block; text-align: center">
-                    <a href = "/peca/{{$peca->id}}">
-                        <div style="display:inline-block; width:100px; height:100px; background-image:url('/storage/pecas_images/{{$peca->imagem}}')"></div>
+                    <a href = "{{url('/peca')}}/{{$peca->id}}">
+                        <img src="{{url('storage/pecas_images')}}/{{$peca->imagem}}" style="display:inline-block; width:100px; height:100px;">
                     </a>
                     <br>
                     <span class="box-title"><b>{{$peca->nome}}</b></span>
-                    <br> 
+                    <br>
                     <div style="display:inline-block; height: 10px"></div>
-                </div>    
+                </div>
             @endforeach
         </div>
         <div class="box-footer">
-            <a href="/peca/byEvaluation/0/10"><button type="button" class="btn pull-right btn-primary">Ver Mais</button></a>
+            <a href="{{url('/peca')}}/byEvaluation/0/10"><button type="button" class="btn pull-right btn-primary">Ver Mais</button></a>
         </div>
     </div>
 </div>
@@ -71,7 +71,7 @@
             </span>
         </div>
         <div class="box-body">
-           
+
         </div>
         <div class="box-footer">
             <button type="button" class="btn pull-right btn-primary">Ver Mais</button>

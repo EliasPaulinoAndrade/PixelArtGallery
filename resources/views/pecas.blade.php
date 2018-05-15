@@ -6,7 +6,7 @@
     <section class="content-header">
         <h1>
             Obras
-        </h1> 
+        </h1>
     </section>
 @stop
 
@@ -18,7 +18,7 @@
                 <a href="#" class="text-blue">{{$title}}</a>
             </span>
         </div>
-        
+
         <div class="box-body">
             <div class="mailbox-controls">
                 <!-- Check all button -->
@@ -35,16 +35,16 @@
                 </div>
                 <!-- /.pull-right -->
               </div>
-            @foreach($pecas as $peca) 
+            @foreach($pecas as $peca)
                 <div style="display: inline-block; text-align: center">
-                    <a href = "/peca/{{$peca->id}}">
-                        <div style="display:inline-block; width:100px; height:100px; background-image:url('/storage/pecas_images/{{$peca->imagem}}')"></div>
+                    <a href = "{{url('/peca')}}/{{$peca->id}}">
+                        <img src="{{url('../storage/app/public/perfil_images')}}/{{$peca->imagem}}" style="display:inline-block; width:100px; height:100px;">
                     </a>
                     <br>
                     <span class="box-title"><b>{{$peca->nome}}</b></span>
-                    <br> 
+                    <br>
                     <div style="display:inline-block; height: 10px"></div>
-                </div>    
+                </div>
             @endforeach
             <div class="mailbox-controls">
                 <!-- Check all button -->
@@ -55,7 +55,7 @@
                     </span>
                   <div class="btn-group">
                     <a href= {{$currentLimit > 30? ("/peca/$id/".($currentLimit - 60)."/".($currentLimit - 30)) : "#"}}><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button></a>
-                    <a href= "/peca/{{$id}}/{{$currentLimit}}/{{$currentLimit + 30}}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button></a>
+                    <a href= "{{url('/peca')}}/{{$id}}/{{$currentLimit}}/{{$currentLimit + 30}}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button></a>
                   </div>
                   <!-- /.btn-group -->
                 </div>

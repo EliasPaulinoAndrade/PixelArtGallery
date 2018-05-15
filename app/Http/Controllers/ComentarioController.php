@@ -27,7 +27,7 @@ class ComentarioController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -38,6 +38,11 @@ class ComentarioController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,
+        [
+            'descricao' => 'required|string|max:255',
+            'avaliacao' => 'required|numeric|min:1|max:5'
+        ]);
         /*salva um comentario e uma avaliacao no banco*/
 
         $comentario = new Comentario($request->all());

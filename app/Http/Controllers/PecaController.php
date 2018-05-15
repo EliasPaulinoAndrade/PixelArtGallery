@@ -14,13 +14,19 @@ class PecaController extends Controller
     public function create(){
         /*mostra o formulario de submicao de obras*/
 
-        return view('submit'); 
+        return view('submit');
     }
 
     public function store(Request $request)
     {
-        /*salva uma peca, jutamente com a image, que é salva na pasta storage, 
+        /*salva uma peca, jutamente com a image, que é salva na pasta storage,
         usando o id da peca criada*/
+        $this->validate($request,
+        [
+            'nome' => 'required|string|max:255',
+            'descricao' => 'required|string|max:255',
+            'imagem' => 'required|image'
+        ]);
 
         $peca = new Peca($request->all());
         $peca->data = Carbon::now();
@@ -40,7 +46,7 @@ class PecaController extends Controller
     }
 
     public function show($id)
-    {        
+    {
         /*busca a peca e uma avaliacao dela feita pelo usuario logado, se houver retorna*/
 
         $peca = Peca::myFind($id);
@@ -49,7 +55,7 @@ class PecaController extends Controller
         if(Auth::user() != null){
             $avaliacao = Avaliacao::getAvaliacaoByAutorAndPeca(Auth::user()->id, $peca->id);
         }
-        return view('peca', compact("peca", "avaliacao")); 
+        return view('peca', compact("peca", "avaliacao"));
     }
 
     public function edit($id)
@@ -57,12 +63,18 @@ class PecaController extends Controller
         /*motra o formulario de edição de uma peca*/
 
         $peca = Peca::myFind($id);
-        return view('edit', compact("peca")); 
+        return view('edit', compact("peca"));
     }
 
     public function update(Request $request, $id)
     {
         /*busca a peca pelo id, atualiza seus campos e a salva */
+        $this->validate($request,
+        [
+            'nome' => 'required|string|max:255',
+            'descricao' => 'required|string|max:255'
+        ]);
+
         $peca = Peca::myFind($id);
         if($peca->autor_id != Auth::user()->id){
             return redirect("/home");
@@ -79,7 +91,7 @@ class PecaController extends Controller
     public function destroy($id)
     {
         /*remove uma peca do banco de dados*/
-        
+
         $peca = Peca::myFind($id);
         if($peca->autor_id != Auth::user()->id){
             return redirect("/home");
@@ -94,7 +106,7 @@ class PecaController extends Controller
         /*retorna peças por update, o $title vai ser mostrado no header da pagina, o $id diz qual
         controller chamou a pagina*/
 
-        $pecas = Peca::getSortedByDate($limit = $end - $begin, $offset = $begin); 
+        $pecas = Peca::getSortedByDate($limit = $end - $begin, $offset = $begin);
 
         $title = "Obras Mais Recentes";
         $currentLimit = $end;
